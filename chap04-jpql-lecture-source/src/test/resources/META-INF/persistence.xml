@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
+<!--    엔티티매니져 팩토리를 식별하기 우한 이름설정-->
+    <persistence-unit name="jpatest">
+<!--        <class>com.ohgiraffers.section01.simple.Menu</class>-->
+<!--        <class>com.ohgiraffers.section02.parameter.Menu</class>-->
+<!--        <class>com.ohgiraffers.section03.projection.Menu</class>-->
+<!--        <class>com.ohgiraffers.section03.projection.BiDirectionCategory</class>-->
+<!--        <class>com.ohgiraffers.section03.projection.BiDirectionMenu</class>-->
+<!--        <class>com.ohgiraffers.section03.projection.EmbeddedMenu</class>-->
+<!--        <class>com.ohgiraffers.section03.projection.Category</class>-->
+<!--        <class>com.ohgiraffers.section04.paging.Menu</class>-->
+<!--        <class>com.ohgiraffers.section05.groupfuntion.Menu</class>-->
+<!--        <class>com.ohgiraffers.section06.join.Category</class>-->
+<!--        <class>com.ohgiraffers.section06.join.Menu</class>-->
+<!--        <class>com.ohgiraffers.section07.subquery.Category</class>-->
+<!--        <class>com.ohgiraffers.section07.subquery.Menu</class>-->
+<!--        <class>com.ohgiraffers.section08.namedquery.Menu</class>-->
+        <class>com.ohgiraffers.section09.nativequery.Menu</class>
+
+        <properties>
+<!--            데이터베이스 연결정보                -->
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/menudb"/>
+            <property name="jakarta.persistence.jdbc.user" value="ohgiraffers"/>
+            <property name="jakarta.persistence.jdbc.password" value="ohgiraffers"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+
+        </properties>
+    </persistence-unit>
+</persistence>
