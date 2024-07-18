@@ -21,5 +21,4 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
     //크거나같은
     List<Menu> findByMenuPriceThanEqual(Integer menuPrice);
 
-
 }

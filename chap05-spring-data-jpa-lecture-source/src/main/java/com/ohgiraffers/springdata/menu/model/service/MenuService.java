@@ -62,7 +62,6 @@ public class MenuService {
                 Sort.by("menuCode").descending());
 
         Page<Menu> menuList = menuRepository.findAll(pageable);
-
         return menuList.map(menu -> modelMapper.map(menu, MenuDto.class));
     }
 
@@ -105,9 +104,9 @@ public List<MenuDto> findByMenuPrice(Integer menuPrice) {
             .collect(Collectors.toList());
 }
 
-    public List<CategoryDto> findAllCategory() {
-      List<Category> categoryList = categoryRepository.findAll
-
-        return "";
-    }
+//    public List<CategoryDto> findAllCategory() {
+//      List<Category> categoryList = categoryRepository.findAll
+//
+//        return "";
+//    }
 }
