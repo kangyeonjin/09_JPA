@@ -12,13 +12,13 @@ import java.util.List;
 //jpaRepository<엔티티명, pk타입>
 public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
-    //쿼리 메소드
-    List<Menu> findByMenuPriceGreaterThan(Integer menuPrice, Sort menuPrice1);
-    List<Menu> findByMenuPriceGreaterThanOrderByMenuPriceDesc(Integer menuPrice);
-
-    //menuprice랑 같은 금액의 메뉴목록조회
-    List<Menu> findByMenuPriceEqual(Integer menuPrice);
-    //크거나같은
-    List<Menu> findByMenuPriceThanEqual(Integer menuPrice);
+//    //쿼리 메소드
+//    List<Menu> findByMenuPriceGreaterThan(Integer menuPrice, Sort menuPrice1);
+//    List<Menu> findByMenuPriceGreaterThanOrderByMenuPriceDesc(Integer menuPrice);
+//
+//    //menuprice랑 같은 금액의 메뉴목록조회
+//    List<Menu> findByMenuPriceEqual(Integer menuPrice);
+//    //크거나같은
+//    List<Menu> findByMenuPriceThanEqual(Integer menuPrice);
 
 }

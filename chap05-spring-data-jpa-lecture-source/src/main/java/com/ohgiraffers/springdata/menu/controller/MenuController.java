@@ -78,17 +78,17 @@ public class MenuController {
     public void queryMethodPage(){
     }
 
-    @GetMapping("/search")
-    public String findByMenuPrice(@RequestParam Integer menuPrice, Model model){
-
-        log.info("menuPrice=============={}", menuPrice);
-        List<MenuDto> menuList =  menuService.findByMenuPrice(menuPrice);
-
-        model.addAttribute("menuList", menuList);
-        model.addAttribute("menuPrice", menuPrice);
-
-        return "menu/searchResult";
-    }
+//    @GetMapping("/search")
+//    public String findByMenuPrice(@RequestParam Integer menuPrice, Model model){
+//
+//        log.info("menuPrice=============={}", menuPrice);
+//        List<MenuDto> menuList =  menuService.findByMenuPrice(menuPrice);
+//
+//        model.addAttribute("menuList", menuList);
+//        model.addAttribute("menuPrice", menuPrice);
+//
+//        return "menu/searchResult";
+//    }
 
     @GetMapping("/regist")
     public void registPage(){
@@ -102,6 +102,45 @@ public class MenuController {
 
         return categoryList;
 
+    }
+
+    @PostMapping("/regist")
+    public String registNewmenu(@ModelAttribute MenuDto newMenu){
+
+        log.info("newMenu======>{}", newMenu);
+        menuService.registNewMenu(newMenu);
+
+        return "redirect:/menu/list";
+    }
+
+    @GetMapping("/modify/{menuCode}")
+    public String modifyPage(@PathVariable int menuCode, Model model){
+        log.info("menuCode={}", menuCode);
+
+        //메뉴 코드로 메뉴 조회 해오는 기능
+        MenuDto menu = menuService.findMenuByCode(menuCode);
+        model.addAttribute("menu", menu);
+
+        return "menu/modify";
+    }
+    @PostMapping("/modify")
+    //ModelAttribute
+    public String modifyMenu(MenuDto modifyMenu){
+
+        log.info("modifyMenu ===={}",modifyMenu);
+        menuService.modifyMenu(modifyMenu);
+        return "redirect:/menu/modify/"+modifyMenu.getMenuCode();
+    }
+
+    @GetMapping("/delete")
+    public void deletePage(){}
+
+    @PostMapping("/delete")
+    public String deleteMenu(@RequestParam Integer menuCode){
+        menuService.deleteMenu(menuCode);
+
+        log.info("deleteMenu");
+        return "redirect:/menu/list";
     }
 
 }

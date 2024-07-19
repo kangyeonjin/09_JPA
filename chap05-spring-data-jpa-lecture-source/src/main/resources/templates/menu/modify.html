@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>modify</title>
+</head>
+<body>
+<h1></h1>
+<form action="/menu/modify" method="post">
+    <table>
+        <tr>
+            <th>메뉴번호</th>
+            <th>메뉴이름</th>
+            <th>메뉴가격</th>
+            <th>카테고리코드</th>
+            <th>판매상태</th>
+        </tr>
+
+        <tr>
+<!--        테이블 한행을 표시     -->
+            <td th:text="${menu.menuCode}"></td>
+<!--        입력필드를 사용자한테서 숨기고, menucode값을 포함하여 서버로 전송        -->
+            <input type="hidden" th:value="${menu.menuCode}" name="menuCode">
+<!--        텍스트입력필드를 포함하여 menuName값을 보여주고, 수정할수있게 해줌     -->
+            <td><input type="text" name="menuName" th:value="${menuName}"></td>
+
+            <td th:text="${menu.menuPrice}"></td>
+            <td th:text="${menu.categoryCode}"></td>
+            <td th:text="${menu.orderableStatus}"></td>
+        </tr>
+    </table>
+    <button type="submit">수정</button>
+</form>
+
+
+</body>
+</html>

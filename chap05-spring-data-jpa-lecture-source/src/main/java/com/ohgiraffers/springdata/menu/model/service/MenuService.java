@@ -4,7 +4,9 @@ import com.ohgiraffers.springdata.menu.model.dto.CategoryDto;
 import com.ohgiraffers.springdata.menu.model.dto.MenuDto;
 import com.ohgiraffers.springdata.menu.model.entity.Category;
 import com.ohgiraffers.springdata.menu.model.entity.Menu;
+import com.ohgiraffers.springdata.menu.model.repository.CategoryRepository;
 import com.ohgiraffers.springdata.menu.model.repository.MenuRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -22,10 +24,12 @@ public class MenuService {
 
     private final MenuRepository menuRepository;
     private final ModelMapper modelMapper;
+    private final CategoryRepository categoryRepository;
 
-    public MenuService(MenuRepository menuRepository, ModelMapper modelMapper) {
+    public MenuService(MenuRepository menuRepository, ModelMapper modelMapper, CategoryRepository categoryRepository) {
         this.menuRepository = menuRepository;
         this.modelMapper = modelMapper;
+        this.categoryRepository = categoryRepository;
     }
 
     public MenuDto findMenuByCode(int menuCode) {
@@ -91,22 +95,58 @@ public class MenuService {
 //                .collect(Collectors.toList());
 //    }
 
-public List<MenuDto> findByMenuPrice(Integer menuPrice) {
-
-    List<Menu> menuList = null;
-    if(menuPrice ==0){
-        menuList = menuRepository.findAll();
-    } else if (menuPrice >0) {
-        menuList = menuRepository.findByMenuPriceEqual(menuPrice);
-    }
-    return menuList.stream()
-            .map(menu -> modelMapper.map(menu, MenuDto.class))
-            .collect(Collectors.toList());
-}
-
-//    public List<CategoryDto> findAllCategory() {
-//      List<Category> categoryList = categoryRepository.findAll
+//public List<MenuDto> findByMenuPrice(Integer menuPrice) {
 //
-//        return "";
+//    List<Menu> menuList = null;
+//    if(menuPrice ==0){
+//        menuList = menuRepository.findAll();
+//    } else if (menuPrice >0) {
+//        menuList = menuRepository.findByMenuPriceEqual(menuPrice);
 //    }
+//    return menuList.stream()
+//            .map(menu -> modelMapper.map(menu, MenuDto.class))
+//            .collect(Collectors.toList());
+//}
+
+    public List<CategoryDto> findAllCategory() {
+//        List<Category> categoryList = categoryRepository.findAll();
+//        List<Category> categoryList = categoryRepository.findAllCategoryByJPQL();
+        List<Category> categoryList = categoryRepository.findAllCategoryByNativeQuery();
+
+        return categoryList.stream().map(category -> modelMapper.map(category, CategoryDto.class))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void registNewMenu(MenuDto newMenu) {
+
+//        Menu menu = modelMapper.map(newMenu, Menu.class);
+        //builder 적용
+        Menu menu = new Menu().builder()
+                .menuName(newMenu.getMenuName())
+                .menuPrice(newMenu.getMenuPrice())
+                .categoryCode(newMenu.getCategoryCode())
+                .orderableStatus(newMenu.getOrderableStatus())
+                .build();
+        menuRepository.save(menu);
+
+    }
+
+
+    @Transactional
+    public void modifyMenu(MenuDto modifyMenu) {
+
+        //modifyMenu -> 비영속
+        //영속
+        Menu foundMenu = menuRepository.findById(modifyMenu.getMenuCode())
+                .orElseThrow(() -> new IllegalArgumentException("Menu not found"));
+        foundMenu.setMenuName(modifyMenu.getMenuName());
+        log.info("foundMenu===>{}", foundMenu);
+    }
+
+    @Transactional
+    public void deleteMenu(Integer menuCode) {
+    menuRepository.deleteById(menuCode);
+
+    }
 }
