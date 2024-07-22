@@ -15,6 +15,4 @@ public class CategoryDto {
 
     private String refCategoryCode;
 
-
-
 }

@@ -42,14 +42,11 @@ public class MenuService {
         * */
         Menu menu = menuRepository.findById(menuCode)
                 .orElseThrow(IllegalArgumentException::new);  //찾을수없을떄 발생하는 예외
-
         log.info("menu ========={}", menu);
-
         return modelMapper.map(menu, MenuDto.class);
     }
 
     public List<MenuDto> findMenuList() {
-
         List<Menu> menuList =
                 menuRepository.findAll();
 //                menuRepository.findAll(Sort.by("menuPrice").descending());
@@ -64,7 +61,6 @@ public class MenuService {
                 pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1,
                 pageable.getPageSize(),
                 Sort.by("menuCode").descending());
-
         Page<Menu> menuList = menuRepository.findAll(pageable);
         return menuList.map(menu -> modelMapper.map(menu, MenuDto.class));
     }
@@ -112,14 +108,12 @@ public class MenuService {
 //        List<Category> categoryList = categoryRepository.findAll();
 //        List<Category> categoryList = categoryRepository.findAllCategoryByJPQL();
         List<Category> categoryList = categoryRepository.findAllCategoryByNativeQuery();
-
         return categoryList.stream().map(category -> modelMapper.map(category, CategoryDto.class))
                 .collect(Collectors.toList());
     }
 
     @Transactional
     public void registNewMenu(MenuDto newMenu) {
-
 //        Menu menu = modelMapper.map(newMenu, Menu.class);
         //builder 적용
         Menu menu = new Menu().builder()
@@ -129,13 +123,11 @@ public class MenuService {
                 .orderableStatus(newMenu.getOrderableStatus())
                 .build();
         menuRepository.save(menu);
-
     }
 
 
     @Transactional
     public void modifyMenu(MenuDto modifyMenu) {
-
         //modifyMenu -> 비영속
         //영속
         Menu foundMenu = menuRepository.findById(modifyMenu.getMenuCode())
@@ -146,7 +138,6 @@ public class MenuService {
 
     @Transactional
     public void deleteMenu(Integer menuCode) {
-    menuRepository.deleteById(menuCode);
-
+          menuRepository.deleteById(menuCode);
     }
 }

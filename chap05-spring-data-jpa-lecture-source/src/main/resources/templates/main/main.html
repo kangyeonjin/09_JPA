@@ -2,20 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main</title>
+    <style>
+        tbody{
+        background-color: aqua;
+    }
+        #internalstylesheet{
+            color: crimson;
+            text-decoration: underline;
+        }
+    </style>
+
 </head>
 <body>
-
 <h1>😀Ohgiraffers Restaurant에 오신걸 환영합니다.</h1>
-<button onclick="location.href ='/menu/7'">7번 메뉴보기</button><br><br>
-<button onclick="location.href ='/menu/list'">전체메뉴 목록보기</button><br><br>
+<hr>
+<p>안녕하세요 반갑습니다</p>
+<ul style="list-style: upper-roman;">
+    <li>Html5</li>
+    <li id="externalstylesheet">css3</li>
+    <li id="internalstylesheet">jacascript</li>
+</ul>
+<!--id :페이지내 태그의식별자, 태그별로 유일한 값을 생성-->
+<em id="hi1234">안녕</em>
+<em id ="bye">잘가</em><br><br>
 
-<button onclick="location.href='/menu/querymethod'">쿼리 메소드 테스트하기</button><br><br>
-<button onclick="location.href='/menu/regist'">메뉴 입력하기</button><br><br>
-<button onclick="location.href='/menu/modify/24'">메뉴 수정하기</button><br><br>
+<table border="1">
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+    </tr>
+    <tr>
+    <th>브라우저명</th>
+    <th>제조사</th>
+    <th>홈페이지</th>
+    </tr>
+</table>
+<img src="https://kr.pinterest.com/pin/422281210023767/">
+<!--<iframe src="./" frameborder="1" width="100%"></iframe>-->
+<!--<iframe width="560" height="315" src="https://www.youtube.com/watch?v=wZpb3_DpQbQ" title="YouTube video" frameborder="0"-->
+<!--        allow="accelerometer; autoplay;clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"-->
+<!--        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>-->
+
+<hr>
+<button onclick="location.href ='/menu/7'">7번 메뉴보기</button>
+<button onclick="location.href ='/menu/list'">전체메뉴 목록보기</button>
+
+<button onclick="location.href='/menu/querymethod'">쿼리 메소드 테스트하기</button>
+<button onclick="location.href='/menu/regist'">메뉴 입력하기</button>
+<button onclick="location.href='/menu/modify/24'">메뉴 수정하기</button>
 <button onclick="location.href='/menu/delete'">메뉴 삭제하기</button>
-<button onclick="location.href='/menu/category'">메뉴 삭제하기</button>
+<!--<button onclick="location.href='/menu/category'">메뉴 삭제하기</button>-->
 
+<hr>
+
+<ul>
+    <li><a href="http://naver.com">네이버로 이동하기</a> </li>
+    <li><a href="#content">페이지내에서 이동하기</a></li>
+    <h2 id ="menu">페이지내에서 점프하는 엥커만들기</h2>
+</ul>
+<hr>
+<h4>post임</h4>
+<form action="search" method="post">
+    <label>검색할내용</label>
+    <input type="text">
+    <button type="submit">검색</button>
+</form>
+<hr>
+<h4>get임</h4>
+<form action="test" method="get">
+    <fieldset>
+        <legend>필드셋의 제목을 작성하는 부분</legend>
+        <label>입력 :</label><input type="text" value="사과">
+    </fieldset>
+</form>
 </body>
-
+<hr>
+<footer>
+    <h2> footer</h2>
+    <h3 id="content">페이지내에서 이동하기</h3>
+    <a href="#menu">메뉴로이동</a>
+</footer>
 </html>
